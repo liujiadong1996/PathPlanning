@@ -1,8 +1,8 @@
 #include "common/math/vec2d.hpp"
 
-#include <climits>
 #include <cmath>
 #include <iostream>
+#include <limits>
 
 namespace common {
 namespace math {
@@ -71,7 +71,8 @@ Vec2d Vec2d::operator/(const double ratio) const {
   // CHECK_GT(std::abs(ratio), kMathEpsilon);
   if (std::abs(ratio) < kMathEpsilon) {
     std::cout << "[WARN]: Divide ratio is too small !!" << std::endl;
-    return Vec2d(DBL_MAX, DBL_MAX);
+    return Vec2d(std::numeric_limits<double>::max(),
+                 std::numeric_limits<double>::max());
   }
   return Vec2d(x_ / ratio, y_ / ratio);
 }
@@ -99,8 +100,8 @@ Vec2d &Vec2d::operator/=(const double ratio) {
   // CHECK_GT(std::abs(ratio), kMathEpsilon);
   if (std::abs(ratio) < kMathEpsilon) {
     std::cout << "[WARN]: Divide ratio is too small !!" << std::endl;
-    x_ = DBL_MAX;
-    y_ = DBL_MAX;
+    x_ = std::numeric_limits<double>::max();
+    y_ = std::numeric_limits<double>::max();
     return *this;
   }
   x_ /= ratio;

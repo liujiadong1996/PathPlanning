@@ -62,7 +62,7 @@ void CartesianFrenetConverter::frenet_to_cartesian(
   // TODO(liujiadong) glog??
   if (std::abs(rs - s_condition[0] < 1.0e-6)) {
     std::cout
-        << "[ERROR] : The reference point s and s_condition[0] don't mathc"
+        << "[ERROR] : The reference point s and s_condition[0] don't match"
         << std::endl;
   }
 
