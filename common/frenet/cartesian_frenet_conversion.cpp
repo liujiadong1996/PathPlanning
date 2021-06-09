@@ -123,16 +123,11 @@ double CartesianFrenetConverter::CalculateKappa(const double rkappa,
   return numerator / denominator;
 }
 
-CartesianFrenetConverter::Vec2d
-CartesianFrenetConverter::CalculateCartesianPoint(const double rtheta,
-                                                  const Vec2d &rpoint,
-                                                  const double l) {
-  const double x = rpoint.x - l * std::sin(rtheta);
-  const double y = rpoint.y + l * std::cos(rtheta);
-  Vec2d vec2d;
-  vec2d.x = x;
-  vec2d.y = y;
-  return vec2d;
+math::Vec2d CartesianFrenetConverter::CalculateCartesianPoint(
+    const double rtheta, const math::Vec2d &rpoint, const double l) {
+  const double x = rpoint.x() - l * std::sin(rtheta);
+  const double y = rpoint.y() + l * std::cos(rtheta);
+  return math::Vec2d(x, y);
 }
 
 double CartesianFrenetConverter::CalculateLateralDerivative(

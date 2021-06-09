@@ -2,6 +2,8 @@
 
 #include <array>
 
+#include "common/math/vec2d.hpp"
+
 namespace common {
 namespace frenet {
 
@@ -48,13 +50,9 @@ public:
                                const double l, const double dl,
                                const double ddl);
 
-  // TODO(liujiadong) define 2-dimension vector for point
-  struct Vec2d {
-    double x = 0.0;
-    double y = 0.0;
-  };
-  static Vec2d CalculateCartesianPoint(const double rtheta, const Vec2d &rpoint,
-                                       const double l);
+  static math::Vec2d CalculateCartesianPoint(const double rtheta,
+                                             const math::Vec2d &rpoint,
+                                             const double l);
 
   /**
    * @brief: given sl, theta and road's theta, kappa, extract derivative l,
