@@ -2,7 +2,7 @@
 
 #include <vector>
 
-#include "adapter/vectormap_adapter.hpp"
+#include "common/map/map_common.hpp"
 #include "vec2d.hpp"
 
 namespace common {
@@ -11,14 +11,14 @@ namespace math {
 struct LaneWaypoint {
   LaneWaypoint() = default;
   // TODO(liujiadong) glog??
-  LaneWaypoint(adapter::LaneInfoConstPtr lane, const double s)
+  LaneWaypoint(map::LaneInfoConstPtr lane, const double s)
       //   : lane(CHECK_NOTNULL(lane)), s(s) {}
       : lane(lane), s(s) {}
-  LaneWaypoint(adapter::LaneInfoConstPtr lane, const double s, const double l)
+  LaneWaypoint(map::LaneInfoConstPtr lane, const double s, const double l)
       //     : lane(CHECK_NOTNULL(lane)), s(s), l(l) {}
       : lane(lane), s(s), l(l) {}
   // TODO(liujiadong) define map info
-  adapter::LaneInfoConstPtr lane = nullptr;
+  map::LaneInfoConstPtr lane = nullptr;
   double s = 0.0;
   double l = 0.0;
 
@@ -27,11 +27,11 @@ struct LaneWaypoint {
 
 struct LaneSegment {
   LaneSegment() = default;
-  LaneSegment(adapter::LaneInfoConstPtr lane, const double start_s,
+  LaneSegment(map::LaneInfoConstPtr lane, const double start_s,
               const double end_s)
       // : lane(CHECK_NOTNULL(lane)), start_s(start_s), end_s(end_s) {}
       : lane(lane), start_s(start_s), end_s(end_s) {}
-  adapter::LaneInfoConstPtr lane = nullptr;
+  map::LaneInfoConstPtr lane = nullptr;
   double start_s = 0.0;
   double end_s = 0.0;
   double Length() const { return end_s - start_s; }
@@ -75,9 +75,9 @@ public:
   static std::vector<MapPathPoint>
   GetPointsFromSegment(const LaneSegment &segment);
 
-  static std::vector<MapPathPoint>
-  GetPointsFromLane(adapter::LaneInfoConstPtr lane, const double start_s,
-                    const double end_s);
+  static std::vector<MapPathPoint> GetPointsFromLane(map::LaneInfoConstPtr lane,
+                                                     const double start_s,
+                                                     const double end_s);
 
   std::string DebugString() const;
 
@@ -85,5 +85,31 @@ protected:
   double heading_ = 0.0;
   std::vector<LaneWaypoint> lane_waypoints_;
 };
+
+class Path;
+
+class PathApproximation {
+  // TODO(liujiadong)
+public:
+protected:
+};
+
+class Path {
+public:
+protected:
+  int num_points_ = 0;
+  int num_segments_ = 0;
+  std::vector<MapPathPoint> path_points_;
+  std::vector<LaneSegment> lane_segments_;
+  std::vector<double> lane_accumulated_s_;
+  std::vector<LaneSegment> lane_segments_to_next_point_;
+  std::vector<Vec2d> unit_directions_;
+  double lenght_ = 0.0;
+  std::vector<double> accumulated_s_;
+  std::vector<LineSegment2d> segments_;
+  bool use_path_approximation_ = false;
+  PathApproximation approximation_;
+};
+
 } // namespace math
 } // namespace common

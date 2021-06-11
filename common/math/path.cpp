@@ -26,7 +26,7 @@ MapPathPoint::GetPointsFromSegment(const LaneSegment &segment) {
 }
 
 std::vector<MapPathPoint>
-MapPathPoint::GetPointsFromLane(adapter::LaneInfoConstPtr lane,
+MapPathPoint::GetPointsFromLane(map::LaneInfoConstPtr lane,
                                 const double start_s, const double end_s) {
   std::vector<MapPathPoint> points;
   if (start_s >= end_s) {

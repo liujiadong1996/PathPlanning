@@ -119,8 +119,8 @@ Vec2d operator*(const double ratio, const Vec2d &vec) { return vec * ratio; }
 std::string Vec2d::DebugString() const {
   // TODO(liujiadong) absl??
   // return absl::StrCat("vec2d ( x = ", x_, "  y = ", y_, " )");
-  return "vec2d ( x = " + std::to_string(x_) + " y = " + std::to_string(y_) +
-         " )";
+  return "vec2d ( x = " + std::to_string(static_cast<int>(x_)) +
+         "  y = " + std::to_string(static_cast<int>(y_)) + " )";
 }
 } // namespace math
 } // namespace common

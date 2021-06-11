@@ -19,6 +19,14 @@ using common::math::Vec2d;
  */
 double CrossProd(const Vec2d &start_point, const Vec2d &end_point_1,
                  const Vec2d &end_point_2);
+
+/**
+ * @brief Wrap angle to [0, 2*PI)
+ * @param angle the original value of the angle
+ * @return The normalized value of the value
+ */
+double WrapAngle(const double angle);
+
 /**
  * @brief Normalize angle to [-PI, PI)
  * @param angle the original value of the angle

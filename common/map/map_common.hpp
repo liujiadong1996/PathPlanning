@@ -2,11 +2,13 @@
 
 #include <memory>
 #include <string>
+#include <vector>
 
 #include "common/math/line_segment2d.hpp"
 #include "common/math/vec2d.hpp"
 
-namespace adapter {
+namespace common {
+namespace map {
 
 class LaneInfo;
 
@@ -32,4 +34,5 @@ private:
   std::vector<double> headings_;
   std::vector<common::math::LineSegment2d> segments_;
 };
-} // namespace adapter
+} // namespace map
+} // namespace common
