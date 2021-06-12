@@ -2,6 +2,7 @@
 
 #include <vector>
 
+#include "box2d.hpp"
 #include "common/map/map_common.hpp"
 #include "vec2d.hpp"
 
@@ -91,11 +92,145 @@ class Path;
 class PathApproximation {
   // TODO(liujiadong)
 public:
+  PathApproximation() = default;
+  PathApproximation(const Path &path, const double max_error)
+      : max_error_(max_error), max_sqr_error_(max_error * max_error) {
+    Init(path);
+  }
+  double max_error() const { return max_error_; }
+  const std::vector<int> &original_ids() const { return original_ids_; }
+  const std::vector<common::math::LineSegment2d> &segments() const {
+    return segments_;
+  }
+
+  bool GetProjection(const Path &path, const common::math::Vec2d &point,
+                     double *accumulate_s, double *lateral,
+                     double *distance) const;
+
+  bool OverlapWith(const Path &path, const common::math::Box2d &box,
+                   double width) const;
+
 protected:
+  void Init(const Path &path);
+  bool is_within_max_error(const Path &path, const int s, const int t);
+  double compute_max_error(const Path &path, const int s, const int t);
+
+  void InitDilute(const Path &path);
+  void InitProjections(const Path &path);
+
+protected:
+  double max_error_ = 0.0;
+  double max_sqr_error_ = 0.0;
+
+  int num_points_ = 0;
+  std::vector<int> original_ids_;
+  std::vector<common::math::LineSegment2d> segments_;
+  std::vector<double> max_error_per_segment_;
+
+  // Projection of points onto the diluated segments.
+  std::vector<double> projections_;
+  double max_projection_;
+  int num_projection_samples_ = 0;
+
+  // The original_projection is the projection of original points onto the
+  // diluated segments.
+  std::vector<double> original_projections_;
+  // max_p_to_left[i] = max(p[0], p[1], ... p[i]).
+  // min_p_to_right[i] = min(p[i], p[i + 1], ... p[size - 1]).
+  std::vector<double> max_original_projections_to_left_;
+  std::vector<double> min_original_projections_to_right_;
+  std::vector<int> sampled_max_original_projections_to_left_;
+};
+
+class InterpolatedIndex {
+public:
+  InterpolatedIndex(int id, double offset) : id(id), offset(offset) {}
+  int id = 0;
+  double offset = 0.0;
 };
 
 class Path {
 public:
+  Path() = default;
+  explicit Path(const std::vector<MapPathPoint> &path_points);
+  explicit Path(std::vector<MapPathPoint> &&path_points);
+  explicit Path(std::vector<LaneSegment> &&path_points);
+  explicit Path(const std::vector<LaneSegment> &path_points);
+
+  Path(const std::vector<MapPathPoint> &path_points,
+       const std::vector<LaneSegment> &alne_segments);
+  Path(std::vector<MapPathPoint> &&path_points,
+       std::vector<LaneSegment> &&lane_segments);
+
+  Path(const std::vector<MapPathPoint> &path_points,
+       const std::vector<LaneSegment> &lane_segments,
+       const double max_approximation_error);
+  Path(std::vector<MapPathPoint> &&path_points,
+       std::vector<LaneSegment> &&lane_segments,
+       const double max_approximation_error);
+
+  // Return smoothe coordinate by interpolated index or accumulate_s
+  MapPathPoint GetSmoothPoint(const InterpolatedIndex &index) const;
+  MapPathPoint GetSmoothPoint(double s) const;
+
+  // Compute accumulate s value of the index
+  double GetSFromIndex(const InterpolatedIndex &index) const;
+  // Compute interpolated index by accumulated_s
+  InterpolatedIndex GetIndexFromS(double s) const;
+
+  // get the index of the lane from s by accumulated_s
+  InterpolatedIndex GetLaneIndexFromS(double s) const;
+
+  std::vector<LaneSegment> GetLaneSegments(const double start_s,
+                                           const double end_s) const;
+
+  bool GetNearestPoint(const common::math::Vec2d &point, double *accumulate_s,
+                       double *lateral) const;
+  bool GetNearestPoint(const common::math::Vec2d &point, double *accumulate_s,
+                       double *lateral, double *distance) const;
+  bool GetProjectionWithHueristicParams(const common::math::Vec2d &point,
+                                        const double hueristic_start_s,
+                                        const double hueristic_end_s,
+                                        double *accumulate_s, double *lateral,
+                                        double *min_distance) const;
+  bool GetProjection(const common::math::Vec2d &point, double *accumulate_s,
+                     double *lateral) const;
+  bool GetProjection(const common::math::Vec2d &point, double *accumulate_,
+                     double *lateral, double *distance) const;
+
+  bool GetHeadingAlongPath(const common::math::Vec2d &point,
+                           double *heading) const;
+
+  int num_points() const { return num_points_; }
+  int num_segments() const { return num_segments_; }
+  const std::vector<MapPathPoint> &path_points() const { return path_points_; }
+  const std::vector<LaneSegment> &lane_segments() const {
+    return lane_segments_;
+  }
+  const std::vector<LaneSegment> &lane_segments_to_next_point() const {
+    return lane_segments_to_next_point_;
+  }
+  const std::vector<common::math::Vec2d> &unit_directions() const {
+    return unit_directions_;
+  }
+  const std::vector<double> &accumulated_s() const { return accumulated_s_; }
+  const std::vector<LineSegment2d> &segments() const { return segments_; }
+  const PathApproximation *approximation() const { return &approximation_; }
+  double length() const { return length_; }
+
+  double GetLaneLeftWidth(const double s) const;
+  double GetLaneRightWidth(const double s) const;
+  bool GetLaneWidth(const double s, double *lane_left_width,
+                    double *lane_right_width) const;
+
+  double GetRoadLeftWidth(const double s) const;
+  double GetRoadRightWidth(const double s) const;
+  bool GetRoadWidth(const double s, double *road_left_width,
+                    double *road_ight_width) const;
+
+  bool IsOnPath(const common::math::Vec2d &point) const;
+  bool OverlapWith(const common::math::Box2d &box, double width) const;
+
 protected:
   int num_points_ = 0;
   int num_segments_ = 0;
@@ -104,7 +239,7 @@ protected:
   std::vector<double> lane_accumulated_s_;
   std::vector<LaneSegment> lane_segments_to_next_point_;
   std::vector<Vec2d> unit_directions_;
-  double lenght_ = 0.0;
+  double length_ = 0.0;
   std::vector<double> accumulated_s_;
   std::vector<LineSegment2d> segments_;
   bool use_path_approximation_ = false;

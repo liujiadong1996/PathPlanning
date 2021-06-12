@@ -7,7 +7,6 @@
 #include <utility>
 
 #include "common/utils/math_utils.hpp"
-#include "common/utils/string_utils.hpp"
 
 namespace common {
 namespace math {
@@ -24,7 +23,7 @@ Polygon2d::Polygon2d(std::vector<Vec2d> points) : points_(std::move(points)) {
 double Polygon2d::DistanceTo(const Vec2d &point) const {
   // TODO(liujiadong)
   // CHECK_GE(points_.size(), 3U);
-  if (points_.size() <= 3) {
+  if (points_.size() < 3) {
     std::cout << "[WARN]: points is too less !!" << std::endl;
   }
   if (IsPointIn(point)) {
@@ -40,7 +39,7 @@ double Polygon2d::DistanceTo(const Vec2d &point) const {
 double Polygon2d::DistanceSquareTo(const Vec2d &point) const {
   // TODO(liujiadong)
   // CHECK_GE(points_.size(), 3U);
-  if (points_.size() <= 3) {
+  if (points_.size() < 3) {
     std::cout << "[WARN]: points is too less !!" << std::endl;
   }
   if (IsPointIn(point)) {
@@ -60,7 +59,7 @@ double Polygon2d::DistanceTo(const LineSegment2d &line_segment) const {
   }
   // TODO(liujiadong)
   // CHECK_GE(points_.size(), 3U);
-  if (points_.size() <= 3) {
+  if (points_.size() < 3) {
     std::cout << "[WARN]: points is too less !!" << std::endl;
   }
   if (IsPointIn(line_segment.center())) {
@@ -84,7 +83,7 @@ double Polygon2d::DistanceTo(const LineSegment2d &line_segment) const {
 double Polygon2d::DistanceTo(const Box2d &box) const {
   // TODO(liujiadong)
   // CHECK_GE(points_.size(), 3U);
-  if (points_.size() <= 3) {
+  if (points_.size() < 3) {
     std::cout << "[WARN]: points is too less !!" << std::endl;
   }
   return DistanceTo(Polygon2d(box));
@@ -94,10 +93,10 @@ double Polygon2d::DistanceTo(const Polygon2d &polygon) const {
   // TODO(liujiadoong)
   // CHECK_GE(points_.size(), 3U);
   // CHECK_GE(polygon.num_points(), 3);
-  if (points_.size() <= 3) {
+  if (points_.size() < 3) {
     std::cout << "[WARN]: points is too less !!" << std::endl;
   }
-  if (polygon.num_points() <= 3) {
+  if (polygon.num_points() < 3) {
     std::cout << "[WARN]: polygon.num_points is too less !!" << std::endl;
   }
 
@@ -125,7 +124,7 @@ double Polygon2d::DistanceToBoundary(const Vec2d &point) const {
 bool Polygon2d::IsPointOnBoundary(const Vec2d &point) const {
   // TODO(liujiadong)
   // CHECK_GE(points_.size(), 3U);
-  if (points_.size() <= 3) {
+  if (points_.size() < 3) {
     std::cout << "[WARN]: points is too less !!" << std::endl;
   }
   return std::any_of(
@@ -136,7 +135,7 @@ bool Polygon2d::IsPointOnBoundary(const Vec2d &point) const {
 bool Polygon2d::IsPointIn(const Vec2d &point) const {
   // TODO(liujiadong)
   // CHECK_GE(points_.size(), 3U);
-  if (points_.size() <= 3) {
+  if (points_.size() < 3) {
     std::cout << "[WARN]: points is too less !!" << std::endl;
   }
   if (IsPointOnBoundary(point)) {
@@ -159,7 +158,7 @@ bool Polygon2d::IsPointIn(const Vec2d &point) const {
 bool Polygon2d::HasOverlap(const Polygon2d &polygon) const {
   // TODO(liujiadong)
   // CHECK_GE(points_.size(), 3U);
-  if (points_.size() <= 3) {
+  if (points_.size() < 3) {
     std::cout << "[WARN]: points is too less !!" << std::endl;
   }
   if (polygon.max_x() < min_x() || polygon.min_x() > max_x() ||
@@ -175,7 +174,7 @@ bool Polygon2d::Contains(const LineSegment2d &line_segment) const {
   }
   // TODO(liujiadong)
   // CHECK_GE(points_.size(), 3U);
-  if (points_.size() <= 3) {
+  if (points_.size() < 3) {
     std::cout << "[WARN]: points is too less !!" << std::endl;
   }
   if (!IsPointIn(line_segment.start())) {
@@ -198,7 +197,7 @@ bool Polygon2d::Contains(const LineSegment2d &line_segment) const {
 bool Polygon2d::Contains(const Polygon2d &polygon) const {
   // TODO(liujiadong)
   // CHECK_GE(points_.size(), 3U);
-  if (points_.size() <= 3) {
+  if (points_.size() < 3) {
     std::cout << "[WARN]: points is too less !!" << std::endl;
   }
   if (area_ < polygon.area() - kMathEpsilon) {
@@ -222,7 +221,7 @@ void Polygon2d::BuildFromPoints() {
   num_points_ = static_cast<int>(points_.size());
   // TODO(liujiadong)
   // CHECK_GE(num_points_, 3);
-  if (num_points_ <= 3) {
+  if (num_points_ < 3) {
     std::cout << "[WARN]: num_points is too less !!" << std::endl;
   }
 
@@ -378,7 +377,7 @@ bool Polygon2d::ComputeOverlap(const Polygon2d &other_polygon,
                                Polygon2d *const overlap_polygon) const {
   // TODO(liujiadong)
   // CHECK_GE(points_.size(), 3);
-  if (points_.size() <= 3) {
+  if (points_.size() < 3) {
     std::cout << "[WARN]: points_.size() is too less !!" << std::endl;
   }
   // TODO(liujiadong)
@@ -413,7 +412,7 @@ double Polygon2d::ComputeIoU(const Polygon2d &other_polygon) const {
 bool Polygon2d::HasOverlap(const LineSegment2d &line_segment) const {
   // TODO(liujiadong)
   // CHECK_GE(points_.size(), 3);
-  if (points_.size() <= 3) {
+  if (points_.size() < 3) {
     std::cout << "[WARN]: points_.size() is too less !!" << std::endl;
   }
   if ((line_segment.start().x() < min_x_ && line_segment.end().x() < min_x_) ||
@@ -431,7 +430,7 @@ bool Polygon2d::GetOverlap(const LineSegment2d &line_segment,
                            Vec2d *const first, Vec2d *const last) const {
   // TODO(liujiadong)
   // CHECK_GE(points_.size(), 3);
-  if (points_.size() <= 3) {
+  if (points_.size() < 3) {
     std::cout << "[WARN]: points_.size() is too less !!" << std::endl;
     return false;
   }
@@ -489,9 +488,10 @@ std::vector<LineSegment2d>
 Polygon2d::GetAllOverlaps(const LineSegment2d &line_segment) const {
   // TODO(liujiadong)
   // CHECK_GE(points_.size(), 3);
-  if (points_.size() <= 3) {
+  if (points_.size() < 3) {
     std::cout << "[WARN]: points_.size() is too less !!" << std::endl;
-    return;
+    std::vector<LineSegment2d> empty_vec;
+    return empty_vec;
   }
   if (line_segment.length() <= kMathEpsilon) {
     std::vector<LineSegment2d> overlaps;
@@ -547,7 +547,7 @@ void Polygon2d::ExtremePoints(const double heading, Vec2d *const first,
                               Vec2d *const last) const {
   // TODO(liujiadong)
   // CHECK_GE(points_.size(), 3);
-  if (points_.size() <= 3) {
+  if (points_.size() < 3) {
     std::cout << "[WARN]: points_.size() is too less !!" << std::endl;
     return;
   }
@@ -581,9 +581,10 @@ AABox2d Polygon2d::AABoundingBox() const {
 Box2d Polygon2d::BoundingBoxWithHeading(const double heading) const {
   // TODO(liujiadong)
   // CHECK_GE(points_.size(), 3);
-  if (points_.size() <= 3) {
+  if (points_.size() < 3) {
     std::cout << "[WARN]: points_.size() is too less !!" << std::endl;
-    return;
+    Box2d empty_box2d;
+    return empty_box2d;
   }
   const Vec2d direction_vec = Vec2d::CreateUnitVec2d(heading);
   Vec2d px1;
@@ -605,16 +606,18 @@ Box2d Polygon2d::BoundingBoxWithHeading(const double heading) const {
 Box2d Polygon2d::MinAreaBoundingBox() const {
   // TODO(liujiadong)
   // CHECK_GE(points_.size(), 3);
-  if (points_.size() <= 3) {
+  if (points_.size() < 3) {
     std::cout << "[WARN]: points_.size() is too less !!" << std::endl;
-    return;
+    Box2d empty_box2d;
+    return empty_box2d;
   }
   if (!is_convex_) {
     Polygon2d convex_polygon;
     ComputeConvexHull(points_, &convex_polygon);
     if (!convex_polygon.is_convex()) {
       std::cout << "[WARN]: convex_polygon is not convex !!" << std::endl;
-      return;
+      Box2d empty_box2d;
+      return empty_box2d;
     }
     // ACHECK(convex_polygon.is_convex());
     return convex_polygon.MinAreaBoundingBox();
@@ -677,7 +680,8 @@ Polygon2d Polygon2d::ExpandByDistance(const double distance) const {
     // ACHECK(convex_polygon.is_convex());
     if (!convex_polygon.is_convex()) {
       std::cout << "[WARN]: convex_polygon is not convex !!" << std::endl;
-      return;
+      Polygon2d empty_polygon2d;
+      return empty_polygon2d;
     }
     return convex_polygon.ExpandByDistance(distance);
   }
@@ -701,17 +705,25 @@ Polygon2d Polygon2d::ExpandByDistance(const double distance) const {
   }
   Polygon2d new_polygon;
   if (!ComputeConvexHull(points, &new_polygon)) {
-    return;
+    Polygon2d empty_polygon2d;
+    return empty_polygon2d;
   }
   //   ACHECK(ComputeConvexHull(points, &new_polygon));
   return new_polygon;
 }
 
 std::string Polygon2d::DebugString() const {
-  return "polygon2d ( num_points = " + std::to_string(num_points_) +
-             "  points = (" + " )  " + (is_convex_ ? "convex" : "non-convex") +
-             "  area = ",
-         std::to_string(area_) + " )";
+  std::string debug_info;
+  debug_info = "polygon2d (  num_points = " + std::to_string(num_points_) +
+               "  points = (";
+  for (Vec2d point : points_) {
+    debug_info += point.DebugString();
+    debug_info += " ";
+  }
+  debug_info += ")  ";
+  debug_info += (is_convex_ ? "convex" : "non-convex");
+  debug_info += "  area = " + std::to_string(static_cast<int>(area_)) + " )";
+  return debug_info;
 }
 
 } // namespace math

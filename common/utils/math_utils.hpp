@@ -9,6 +9,8 @@ namespace utils {
 
 using common::math::Vec2d;
 
+double Sqr(const double x);
+
 /**
  * @brief Cross product between two 2D vectors from the common start point,
  * and end at two other points
@@ -33,6 +35,24 @@ double WrapAngle(const double angle);
  * @return The normalized value of the angle *
  */
 double NormalizeAngle(const double angle);
+
+/**
+ * @brief Get a random integer between two integer values by a random seed
+ * @param s The lower bound of the random integer
+ * @param t The upper bound of the random integer
+ * @param random_seed The random seed
+ * @return A random integer between s and t based on the input random_seed
+ */
+int RandomInt(const int s, const int t, unsigned int rand_seed = 1);
+
+/**
+ * @brief Get a random double between two integervalues by a random seed
+ * @param s The lower bound of the random double
+ * @param t The upper bound of the random double
+ * @param random_seed The random seed
+ * @return A random double between s and t based on the input random_seed
+ */
+double RandomDouble(const double s, const double t, unsigned int rand_seed = 1);
 
 /**
  * @brief Compute squared value

@@ -33,6 +33,7 @@
 
 # VSCode
 .vscode
+.VSCodeCounter
 
 # build
 build

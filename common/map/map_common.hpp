@@ -27,12 +27,14 @@ public:
   const std::vector<common::math::LineSegment2d> &segments() const {
     return segments_;
   }
+  double total_length() const { return total_length_; }
 
 private:
   const Lane &lane_;
   std::vector<common::math::Vec2d> points_;
   std::vector<double> headings_;
   std::vector<common::math::LineSegment2d> segments_;
+  double total_length_ = 0.0;
 };
 } // namespace map
 } // namespace common
