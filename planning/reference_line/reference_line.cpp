@@ -395,6 +395,7 @@ bool ReferenceLine::XYToSL(const common::math::Vec2d &xy_point,
   }
   sl_point->s = s;
   sl_point->l = l;
+  return true;
 }
 
 ReferencePoint ReferenceLine::InterpolateWithMatchedIndex(
@@ -678,6 +679,7 @@ bool ReferenceLine::GetSLBoundary(const common::math::Box2d &box,
   // The order must be counter-clockwise
   std::vector<common::SLPoint> sl_corners;
   for (const auto &point : corners) {
+    std::cout << point.DebugString() << std::endl;
     common::SLPoint sl_point;
     if (!XYToSL(point, &sl_point)) {
       std::cout << "[ERROR]: Failed to get projection for point: "

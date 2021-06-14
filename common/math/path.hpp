@@ -37,6 +37,8 @@ struct LaneSegment {
   double end_s = 0.0;
   double Length() const { return end_s - start_s; }
 
+  static void Join(std::vector<LaneSegment> *segments);
+
   std::string DebugString() const;
 };
 
@@ -158,7 +160,7 @@ public:
   explicit Path(const std::vector<LaneSegment> &path_points);
 
   Path(const std::vector<MapPathPoint> &path_points,
-       const std::vector<LaneSegment> &alne_segments);
+       const std::vector<LaneSegment> &lane_segments);
   Path(std::vector<MapPathPoint> &&path_points,
        std::vector<LaneSegment> &&lane_segments);
 
@@ -231,6 +233,18 @@ public:
   bool IsOnPath(const common::math::Vec2d &point) const;
   bool OverlapWith(const common::math::Box2d &box, double width) const;
 
+  std::string DebugString() const;
+
+protected:
+  void Init();
+  void InitPoints();
+  void InitLaneSegments();
+  void InitWidth();
+  void InitPointIndex();
+  void InitOverlaps();
+
+  double GetSample(const std::vector<double> &samples, const double s) const;
+
 protected:
   int num_points_ = 0;
   int num_segments_ = 0;
@@ -244,6 +258,13 @@ protected:
   std::vector<LineSegment2d> segments_;
   bool use_path_approximation_ = false;
   PathApproximation approximation_;
+
+  int num_sample_points_ = 0;
+  std::vector<double> lane_left_width_;
+  std::vector<double> lane_right_width_;
+  std::vector<double> road_left_width_;
+  std::vector<double> road_right_width_;
+  std::vector<int> last_point_index_;
 };
 
 } // namespace math

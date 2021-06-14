@@ -1,0 +1,2 @@
+set(subscriber_MESSAGE_FILES "/home/liujiadong/ws/PathPlanning/ros/src/subscriber/msg/DTLane.msg;/home/liujiadong/ws/PathPlanning/ros/src/subscriber/msg/Lane.msg;/home/liujiadong/ws/PathPlanning/ros/src/subscriber/msg/LaneArray.msg;/home/liujiadong/ws/PathPlanning/ros/src/subscriber/msg/Waypoint.msg;/home/liujiadong/ws/PathPlanning/ros/src/subscriber/msg/WaypointState.msg")
+set(subscriber_SERVICE_FILES "")

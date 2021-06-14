@@ -77,6 +77,10 @@ public:
               common::math::Vec2d *const xy_point) const;
   bool XYToSL(const common::math::Vec2d &xy_point,
               common::SLPoint *const sl_point) const;
+  bool XYToSL(const common::PathPoint &xy,
+              common::SLPoint *const sl_point) const {
+    return XYToSL(common::math::Vec2d(xy.x, xy.y), sl_point);
+  }
   template <class XYPoint>
   bool XYToSL(const XYPoint &xy, common::SLPoint *const sl_point) const {
     return XYToSL(common::math::Vec2d(xy.x(), xy.y()), sl_point);
