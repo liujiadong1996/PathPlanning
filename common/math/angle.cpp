@@ -43,5 +43,5 @@ float tan(Angle8 a) {
   Angle16 b(static_cast<int16_t>(a.raw() << 8));
   return tan(b);
 }
-} // namespace math
-} // namespace common
+}  // namespace math
+}  // namespace common

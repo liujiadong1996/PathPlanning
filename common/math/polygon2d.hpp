@@ -15,7 +15,7 @@ namespace math {
  * @brief The class of polygon in 2D
  */
 class Polygon2d {
-public:
+ public:
   /**
    * @brief Empty constructor.
    */
@@ -206,8 +206,8 @@ public:
    *        line segments with this polygon.
    * @return A group of overlapped line segments.
    */
-  std::vector<LineSegment2d>
-  GetAllOverlaps(const LineSegment2d &line_segment) const;
+  std::vector<LineSegment2d> GetAllOverlaps(
+      const LineSegment2d &line_segment) const;
 
   /**
    * @brief Check if this polygon has overlap with another polygon.
@@ -291,7 +291,7 @@ public:
   double min_y() const { return min_y_; }
   double max_y() const { return max_y_; }
 
-protected:
+ protected:
   void BuildFromPoints();
   int Next(int at) const;
   int Prev(int at) const;
@@ -309,5 +309,5 @@ protected:
   double min_y_ = 0.0;
   double max_y_ = 0.0;
 };
-} // namespace math
-} // namespace common
+}  // namespace math
+}  // namespace common

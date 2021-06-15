@@ -484,8 +484,8 @@ void Polygon2d::GetAllVertices(std::vector<Vec2d> *const vertices) const {
 
 std::vector<Vec2d> Polygon2d::GetAllVertices() const { return points_; }
 
-std::vector<LineSegment2d>
-Polygon2d::GetAllOverlaps(const LineSegment2d &line_segment) const {
+std::vector<LineSegment2d> Polygon2d::GetAllOverlaps(
+    const LineSegment2d &line_segment) const {
   // TODO(liujiadong)
   // CHECK_GE(points_.size(), 3);
   if (points_.size() < 3) {
@@ -597,10 +597,10 @@ Box2d Polygon2d::BoundingBoxWithHeading(const double heading) const {
   const double x2 = px2.InnerProd(direction_vec);
   const double y1 = py1.CrossProd(direction_vec);
   const double y2 = py2.CrossProd(direction_vec);
-  return Box2d((x1 + x2) / 2.0 * direction_vec +
-                   (y1 + y2) / 2.0 *
-                       Vec2d(direction_vec.y(), -direction_vec.x()),
-               heading, x2 - x1, y2 - y1);
+  return Box2d(
+      (x1 + x2) / 2.0 * direction_vec +
+          (y1 + y2) / 2.0 * Vec2d(direction_vec.y(), -direction_vec.x()),
+      heading, x2 - x1, y2 - y1);
 }
 
 Box2d Polygon2d::MinAreaBoundingBox() const {
@@ -726,5 +726,5 @@ std::string Polygon2d::DebugString() const {
   return debug_info;
 }
 
-} // namespace math
-} // namespace common
+}  // namespace math
+}  // namespace common

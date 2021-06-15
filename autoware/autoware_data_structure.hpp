@@ -296,7 +296,7 @@ struct Lane {
   int to_area_id;
   std::vector<int> from_ids;
   std::vector<int> to_ids;
-  int num; // lane number in the road segment from left to right
+  int num;  // lane number in the road segment from left to right
   double speed;
   double length;
   double dir;
@@ -399,4 +399,4 @@ struct RoadNetwork {
   std::vector<TrafficSign> signs;
 };
 
-} // namespace autoware
+}  // namespace autoware

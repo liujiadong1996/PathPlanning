@@ -155,5 +155,5 @@ double CartesianFrenetConverter::CalculateSecondOrderLateralDerivative(
   return res;
 }
 
-} // namespace frenet
-} // namespace common
+}  // namespace frenet
+}  // namespace common

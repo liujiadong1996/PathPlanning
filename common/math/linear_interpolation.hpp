@@ -1,8 +1,8 @@
 #pragma once
 
-#include "common/data_structure.hpp"
 #include <cmath>
 #include <iostream>
+#include "common/data_structure.hpp"
 
 namespace common {
 namespace math {
@@ -54,5 +54,5 @@ TrajectoryPoint InterpolateUsingLinearApproximation(const TrajectoryPoint &tp0,
                                                     const TrajectoryPoint &tp1,
                                                     const double t);
 
-} // namespace math
-} // namespace common
+}  // namespace math
+}  // namespace common

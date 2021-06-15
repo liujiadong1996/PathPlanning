@@ -49,5 +49,5 @@ void ReferencePoint::RemoveDuplicates(std::vector<ReferencePoint> *points) {
   points->resize(count);
 }
 
-} // namespace reference_line
-} // namespace planning
+}  // namespace reference_line
+}  // namespace planning

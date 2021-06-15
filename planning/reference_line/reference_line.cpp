@@ -113,8 +113,8 @@ bool ReferenceLine::Stitich(const ReferenceLine &other) {
   return true;
 }
 
-ReferencePoint
-ReferenceLine::GetNearestReferencePoint(const common::math::Vec2d &xy) const {
+ReferencePoint ReferenceLine::GetNearestReferencePoint(
+    const common::math::Vec2d &xy) const {
   double min_dist = std::numeric_limits<double>::max();
   size_t min_index = 0;
   for (size_t i = 0; i < reference_points_.size(); ++i) {
@@ -169,8 +169,8 @@ bool ReferenceLine::Segment(const double s, const double look_backward,
   return true;
 }
 
-common::FrenetFramePoint
-ReferenceLine::GetFrenetPoint(const common::PathPoint &path_point) const {
+common::FrenetFramePoint ReferenceLine::GetFrenetPoint(
+    const common::PathPoint &path_point) const {
   if (reference_points_.empty()) {
     return common::FrenetFramePoint();
   }
@@ -265,8 +265,8 @@ size_t ReferenceLine::GetNearestReferenceIndex(const double s) const {
   return std::distance(accumulated_s.begin(), it_lower);
 }
 
-std::vector<ReferencePoint>
-ReferenceLine::GetReferencePoints(double start_s, double end_s) const {
+std::vector<ReferencePoint> ReferenceLine::GetReferencePoints(
+    double start_s, double end_s) const {
   if (start_s < 0.0) {
     start_s = 0.0;
   }
@@ -545,8 +545,8 @@ void ReferenceLine::GetLaneFromS(
   return;
 }
 
-double
-ReferenceLine::GetDrivingWidth(const common::SLBoundary &sl_boundary) const {
+double ReferenceLine::GetDrivingWidth(
+    const common::SLBoundary &sl_boundary) const {
   double lane_left_width = 0.0;
   double lane_right_width = 0.0;
   GetLaneWidth(sl_boundary.start_s, &lane_left_width, &lane_right_width);
@@ -732,8 +732,8 @@ bool ReferenceLine::GetSLBoundary(const common::math::Box2d &box,
   return true;
 }
 
-std::vector<common::math::LaneSegment>
-ReferenceLine::GetLaneSegments(const double start_s, const double end_s) const {
+std::vector<common::math::LaneSegment> ReferenceLine::GetLaneSegments(
+    const double start_s, const double end_s) const {
   return map_path_.GetLaneSegments(start_s, end_s);
 }
 
@@ -887,5 +887,5 @@ void ReferenceLine::AddSpeedLimit(double start_s, double end_s,
             });
 }
 
-} // namespace reference_line
-} // namespace planning
+}  // namespace reference_line
+}  // namespace planning

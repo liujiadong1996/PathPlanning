@@ -202,5 +202,5 @@ std::string LineSegment2d::DebugString() const {
   return "segment2d ( start = " + start_.DebugString() +
          " end = " + end_.DebugString() + " )";
 }
-} // namespace math
-} // namespace common
+}  // namespace math
+}  // namespace common

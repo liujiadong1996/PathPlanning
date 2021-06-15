@@ -16,7 +16,7 @@ namespace frenet {
 // d_prime: dd / ds
 // d_pprime: d(d_prime) / ds
 class CartesianFrenetConverter {
-public:
+ public:
   CartesianFrenetConverter() = delete;
   /**
    * Convert a vehicle state in Cartesian frame to Frenet frame
@@ -64,11 +64,10 @@ public:
   /**
    * @brief: extract second derivative l
    */
-  static double
-  CalculateSecondOrderLateralDerivative(const double rtheta, const double theta,
-                                        const double rkappa, const double kappa,
-                                        const double rdkappa, const double l);
+  static double CalculateSecondOrderLateralDerivative(
+      const double rtheta, const double theta, const double rkappa,
+      const double kappa, const double rdkappa, const double l);
 };
 
-} // namespace frenet
-} // namespace common
+}  // namespace frenet
+}  // namespace common

@@ -10,7 +10,7 @@ namespace planning {
 namespace reference_line {
 
 class ReferencePoint : public common::math::MapPathPoint {
-public:
+ public:
   ReferencePoint() = default;
 
   ReferencePoint(const MapPathPoint &map_path_point, const double kappa,
@@ -25,9 +25,9 @@ public:
 
   static void RemoveDuplicates(std::vector<ReferencePoint> *points);
 
-private:
+ private:
   double kappa_ = 0.0;
   double dkappa_ = 0.0;
 };
-} // namespace reference_line
-} // namespace planning
+}  // namespace reference_line
+}  // namespace planning

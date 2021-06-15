@@ -15,7 +15,7 @@ namespace planning {
 namespace reference_line {
 
 class ReferenceLine {
-public:
+ public:
   ReferenceLine() = default;
   explicit ReferenceLine(const ReferenceLine &reference_line) = default;
   template <typename Iterator>
@@ -44,11 +44,11 @@ public:
 
   ReferencePoint GetReferencePoint(const double s) const;
 
-  common::FrenetFramePoint
-  GetFrenetPoint(const common::PathPoint &path_point) const;
+  common::FrenetFramePoint GetFrenetPoint(
+      const common::PathPoint &path_point) const;
 
-  std::pair<std::array<double, 3>, std::array<double, 3>>
-  ToFrenetFrame(const common::TrajectoryPoint &traj_point) const;
+  std::pair<std::array<double, 3>, std::array<double, 3>> ToFrenetFrame(
+      const common::TrajectoryPoint &traj_point) const;
 
   std::vector<ReferencePoint> GetReferencePoints(double start_s,
                                                  double end_s) const;
@@ -57,8 +57,8 @@ public:
 
   ReferencePoint GetNearestReferencePoint(const common::math::Vec2d &xy) const;
 
-  std::vector<common::math::LaneSegment>
-  GetLaneSegments(const double start_s, const double end_s) const;
+  std::vector<common::math::LaneSegment> GetLaneSegments(
+      const double start_s, const double end_s) const;
 
   ReferencePoint GetNearestReferencePoint(const double s) const;
 
@@ -103,7 +103,8 @@ public:
 
   bool IsOnLane(const common::SLPoint &sl_point) const;
   bool IsOnLane(const common::math::Vec2d &vec2d_point) const;
-  template <class XYPoint> bool IsOnLane(const XYPoint &xy) const {
+  template <class XYPoint>
+  bool IsOnLane(const XYPoint &xy) const {
     return IsOnLane(common::math::Vec2d(xy.x(), xy.y()));
   }
   bool IsOnLane(const common::SLBoundary &sl_boundary) const;
@@ -130,7 +131,7 @@ public:
 
   const common::math::Path &GetMapPath() const { return map_path_; }
 
-private:
+ private:
   static ReferencePoint Interpolate(const ReferencePoint &p0, const double s0,
                                     const ReferencePoint &p1, const double s1,
                                     const double s);
@@ -142,7 +143,7 @@ private:
                                      const ReferencePoint &p1, const double s1,
                                      const double x, const double y);
 
-private:
+ private:
   struct SpeedLimit {
     double start_s = 0.0;
     double end_s = 0.0;
@@ -157,5 +158,5 @@ private:
   common::math::Path map_path_;
   uint32_t priority_ = 0;
 };
-} // namespace reference_line
-} // namespace planning
+}  // namespace reference_line
+}  // namespace planning

@@ -1,8 +1,8 @@
+#include <vector>
 #include "common/math/euler_angles_zxy.hpp"
 #include "planning/reference_line/reference_line.hpp"
 #include "ros/ros.h"
 #include "subscriber/LaneArray.h"
-#include <vector>
 
 void callbackGetLaneArray(const subscriber::LaneArray &msg) {
   std::cout << "Received Lanes" << msg.id << std::endl;
@@ -37,9 +37,17 @@ void callbackGetLaneArray(const subscriber::LaneArray &msg) {
   // test obstacle box
   common::math::Vec2d box_center(-26740.1, 98892.1);
   double heading = 2.721338;
-  double length = 1.0;
-  double width = 1.0;
+  double length = 5.0;
+  double width = 3.0;
   common::math::Box2d obs_box(box_center, heading, length, width);
+  std::vector<common::math::Vec2d> corners;
+  obs_box.GetAllCorners(&corners);
+  for (const auto &corner : corners) {
+    common::SLPoint corner_sl;
+    refline.XYToSL(corner, &corner_sl);
+    std::cout << "corner, s: " << corner_sl.s << " , l: " << corner_sl.l
+              << std::endl;
+  }
   common::SLBoundary obs_sl_boundary;
   refline.GetSLBoundary(obs_box, &obs_sl_boundary);
   std::cout << "obs_box, start_s: " << obs_sl_boundary.start_s

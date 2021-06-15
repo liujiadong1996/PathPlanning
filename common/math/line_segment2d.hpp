@@ -12,7 +12,7 @@ namespace math {
  * @brief Line segment in 2d
  */
 class LineSegment2d {
-public:
+ public:
   /**
    * @brief Empty constructor
    */
@@ -186,12 +186,12 @@ public:
    */
   std::string DebugString() const;
 
-private:
+ private:
   Vec2d start_;
   Vec2d end_;
   Vec2d unit_direction_;
   double heading_ = 0.0;
   double length_ = 0.0;
 };
-} // namespace math
-} // namespace common
+}  // namespace math
+}  // namespace common
