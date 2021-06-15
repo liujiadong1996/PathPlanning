@@ -13,7 +13,7 @@ namespace math {
  * @brief Implemets a class of (undirected) axes-aligned bounding boxes in 2D
  */
 class AABox2d {
-public:
+ public:
   /**
    * @brief Default constructor.
    * Creates an axes-aligned box with zero length and width at the origin.
@@ -191,12 +191,12 @@ public:
    */
   std::string DebugString() const;
 
-private:
+ private:
   Vec2d center_;
   double length_ = 0.0;
   double width_ = 0.0;
   double half_length_ = 0.0;
   double half_width_ = 0.0;
 };
-} // namespace math
-} // namespace common
+}  // namespace math
+}  // namespace common

@@ -122,5 +122,5 @@ std::string Vec2d::DebugString() const {
   return "vec2d ( x = " + std::to_string(x_) + "  y = " + std::to_string(y_) +
          " )";
 }
-} // namespace math
-} // namespace common
+}  // namespace math
+}  // namespace common

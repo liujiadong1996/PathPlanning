@@ -37,5 +37,5 @@ int RandomInt(const int s, const int t, unsigned int rand_seed) {
 double RandomDouble(const double s, const double t, unsigned int rand_seed) {
   return s + (t - s) / 16383.0 * (rand_r(&rand_seed) & 16383);
 }
-} // namespace utils
-} // namespace common
+}  // namespace utils
+}  // namespace common

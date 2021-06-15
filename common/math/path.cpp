@@ -40,14 +40,13 @@ std::string LaneSegment::DebugString() const {
          std::to_string(end_s);
 }
 
-std::vector<MapPathPoint>
-MapPathPoint::GetPointsFromSegment(const LaneSegment &segment) {
+std::vector<MapPathPoint> MapPathPoint::GetPointsFromSegment(
+    const LaneSegment &segment) {
   return GetPointsFromLane(segment.lane, segment.start_s, segment.end_s);
 }
 
-std::vector<MapPathPoint>
-MapPathPoint::GetPointsFromLane(map::LaneInfoConstPtr lane,
-                                const double start_s, const double end_s) {
+std::vector<MapPathPoint> MapPathPoint::GetPointsFromLane(
+    map::LaneInfoConstPtr lane, const double start_s, const double end_s) {
   std::vector<MapPathPoint> points;
   if (start_s >= end_s) {
     return points;
@@ -67,9 +66,9 @@ MapPathPoint::GetPointsFromLane(map::LaneInfoConstPtr lane,
                             lane->headings()[i], LaneWaypoint(lane, start_s));
       }
       if (end_s > accumulate_s && end_s < next_accumulate_s) {
-        points.emplace_back(segment.start() + segment.unit_direction() *
-                                                  (end_s - accumulate_s),
-                            lane->headings()[i], LaneWaypoint(lane, end_s));
+        points.emplace_back(
+            segment.start() + segment.unit_direction() * (end_s - accumulate_s),
+            lane->headings()[i], LaneWaypoint(lane, end_s));
       }
       accumulate_s = next_accumulate_s;
     }
@@ -686,7 +685,7 @@ void LaneSegment::Join(std::vector<LaneSegment> *segments) {
     ++k;
   }
   segments->resize(k);
-  segments->shrink_to_fit(); // release memory
+  segments->shrink_to_fit();  // release memory
 }
 
 void Path::InitLaneSegments() {
@@ -1124,5 +1123,5 @@ bool Path::OverlapWith(const common::math::Box2d &box, double width) const {
   }
   return false;
 }
-} // namespace math
-} // namespace common
+}  // namespace math
+}  // namespace common

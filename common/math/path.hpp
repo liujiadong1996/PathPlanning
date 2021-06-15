@@ -43,7 +43,7 @@ struct LaneSegment {
 };
 
 class MapPathPoint : public Vec2d {
-public:
+ public:
   MapPathPoint() = default;
   MapPathPoint(const Vec2d &point, double heading)
       : Vec2d(point.x(), point.y()), heading_(heading) {}
@@ -53,7 +53,8 @@ public:
   }
   MapPathPoint(const Vec2d &point, double heading,
                std::vector<LaneWaypoint> lane_waypoints)
-      : Vec2d(point.x(), point.y()), heading_(heading),
+      : Vec2d(point.x(), point.y()),
+        heading_(heading),
         lane_waypoints_(std::move(lane_waypoints)) {}
 
   double heading() const { return heading_; }
@@ -75,8 +76,8 @@ public:
 
   static void RemoveDuplicates(std::vector<MapPathPoint> *points);
 
-  static std::vector<MapPathPoint>
-  GetPointsFromSegment(const LaneSegment &segment);
+  static std::vector<MapPathPoint> GetPointsFromSegment(
+      const LaneSegment &segment);
 
   static std::vector<MapPathPoint> GetPointsFromLane(map::LaneInfoConstPtr lane,
                                                      const double start_s,
@@ -84,7 +85,7 @@ public:
 
   std::string DebugString() const;
 
-protected:
+ protected:
   double heading_ = 0.0;
   std::vector<LaneWaypoint> lane_waypoints_;
 };
@@ -93,7 +94,7 @@ class Path;
 
 class PathApproximation {
   // TODO(liujiadong)
-public:
+ public:
   PathApproximation() = default;
   PathApproximation(const Path &path, const double max_error)
       : max_error_(max_error), max_sqr_error_(max_error * max_error) {
@@ -112,7 +113,7 @@ public:
   bool OverlapWith(const Path &path, const common::math::Box2d &box,
                    double width) const;
 
-protected:
+ protected:
   void Init(const Path &path);
   bool is_within_max_error(const Path &path, const int s, const int t);
   double compute_max_error(const Path &path, const int s, const int t);
@@ -120,7 +121,7 @@ protected:
   void InitDilute(const Path &path);
   void InitProjections(const Path &path);
 
-protected:
+ protected:
   double max_error_ = 0.0;
   double max_sqr_error_ = 0.0;
 
@@ -145,14 +146,14 @@ protected:
 };
 
 class InterpolatedIndex {
-public:
+ public:
   InterpolatedIndex(int id, double offset) : id(id), offset(offset) {}
   int id = 0;
   double offset = 0.0;
 };
 
 class Path {
-public:
+ public:
   Path() = default;
   explicit Path(const std::vector<MapPathPoint> &path_points);
   explicit Path(std::vector<MapPathPoint> &&path_points);
@@ -235,7 +236,7 @@ public:
 
   std::string DebugString() const;
 
-protected:
+ protected:
   void Init();
   void InitPoints();
   void InitLaneSegments();
@@ -245,7 +246,7 @@ protected:
 
   double GetSample(const std::vector<double> &samples, const double s) const;
 
-protected:
+ protected:
   int num_points_ = 0;
   int num_segments_ = 0;
   std::vector<MapPathPoint> path_points_;
@@ -267,5 +268,5 @@ protected:
   std::vector<int> last_point_index_;
 };
 
-} // namespace math
-} // namespace common
+}  // namespace math
+}  // namespace common

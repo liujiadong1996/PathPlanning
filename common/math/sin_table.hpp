@@ -7,5 +7,5 @@ namespace math {
 #define SIN_TABLE_SIZE 16385
 extern const float SIN_TABLE[SIN_TABLE_SIZE];
 
-} // namespace math
-} // namespace common
+}  // namespace math
+}  // namespace common

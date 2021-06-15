@@ -15,7 +15,7 @@ constexpr double kMathEpsilon = 1e-10;
  */
 
 class Vec2d {
-public:
+ public:
   // Constructor which takes x and y coordinates
   constexpr Vec2d(const double x, const double y) noexcept : x_(x), y_(y) {}
 
@@ -97,7 +97,7 @@ public:
   // Returns a human-readable string representing this object
   std::string DebugString() const;
 
-protected:
+ protected:
   double x_ = 0.0;
   double y_ = 0.0;
 };
@@ -105,5 +105,5 @@ protected:
 // Multiplies the given Vec2d by a given scalar
 Vec2d operator*(const double ratio, const Vec2d &vec);
 
-} // namespace math
-} // namespace common
+}  // namespace math
+}  // namespace common

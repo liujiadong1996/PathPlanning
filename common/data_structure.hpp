@@ -62,7 +62,7 @@ struct TrajectoryPoint {
   // path point
   PathPoint path_point;
   // linear velocity
-  double v = 0.0; // [m /s]
+  double v = 0.0;  // [m /s]
   // line acceleration
   double a = 0.0;
   // relative time from beginning of the trajectory
@@ -79,9 +79,9 @@ struct Trajectory {
 };
 
 struct PointENU {
-  double x = 0.0; // East from the origin, in meters
-  double y = 0.0; // North from the origin, in meters
-  double z = 0.0; // Up from the ?? , in meters
+  double x = 0.0;  // East from the origin, in meters
+  double y = 0.0;  // North from the origin, in meters
+  double z = 0.0;  // Up from the ?? , in meters
 };
 
 struct SLBoundary {
@@ -147,4 +147,4 @@ struct Road {
   Type type;
 };
 
-} // namespace common
+}  // namespace common

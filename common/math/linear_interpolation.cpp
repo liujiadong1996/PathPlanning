@@ -99,5 +99,5 @@ TrajectoryPoint InterpolateUsingLinearApproximation(const TrajectoryPoint &tp0,
   return tp;
 }
 
-} // namespace math
-} // namespace common
+}  // namespace math
+}  // namespace common

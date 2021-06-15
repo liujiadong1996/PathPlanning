@@ -10,8 +10,11 @@ namespace common {
 namespace math {
 
 AABox2d::AABox2d(const Vec2d &center, const double length, const double width)
-    : center_(center), length_(length), width_(width),
-      half_length_(length / 2.0), half_width_(width / 2.0) {
+    : center_(center),
+      length_(length),
+      width_(width),
+      half_length_(length / 2.0),
+      half_width_(width / 2.0) {
   if (length_ < -kMathEpsilon) {
     std::cout << "[WARN]: length is too small!!" << std::endl;
   }
@@ -139,5 +142,5 @@ std::string AABox2d::DebugString() const {
          " width = " + std::to_string(width_) + " )";
 }
 
-} // namespace math
-} // namespace common
+}  // namespace math
+}  // namespace common

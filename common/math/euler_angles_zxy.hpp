@@ -2,15 +2,16 @@
 
 #include <cmath>
 
+#include "common/utils/math_utils.hpp"
 #include "eigen3/Eigen/Geometry"
 
-#include "common/utils/math_utils.hpp"
 
 namespace common {
 namespace math {
 
-template <typename T> class EulerAnglesZXY {
-public:
+template <typename T>
+class EulerAnglesZXY {
+ public:
   /**
    * @brief Constructs an identity rotation
    */
@@ -101,7 +102,7 @@ public:
     return {qw, qx, qy, qz};
   }
 
-private:
+ private:
   T roll_;
   T pitch_;
   T yaw_;
@@ -110,5 +111,5 @@ private:
 using EulerAnglesZXYf = EulerAnglesZXY<float>;
 using EulerAnglesZXYd = EulerAnglesZXY<double>;
 
-} // namespace math
-} // namespace common
+}  // namespace math
+}  // namespace common

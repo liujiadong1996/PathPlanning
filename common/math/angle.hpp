@@ -7,8 +7,9 @@
 namespace common {
 namespace math {
 
-template <typename T> class Angle {
-public:
+template <typename T>
+class Angle {
+ public:
   static_assert(std::numeric_limits<T>::is_integer &&
                     std::numeric_limits<T>::is_signed,
                 "T must be a signed integer type");
@@ -100,7 +101,8 @@ public:
    * @param s A scalar
    * @return Result of multiplication
    */
-  template <typename Scalar> Angle operator*=(Scalar s) {
+  template <typename Scalar>
+  Angle operator*=(Scalar s) {
     value_ = static_cast<T>(std::lround(value_ * s));
     return *this;
   }
@@ -110,12 +112,13 @@ public:
    * @param s A scalar
    * @return Result of division
    */
-  template <typename Scalar> Angle operator/=(Scalar s) {
+  template <typename Scalar>
+  Angle operator/=(Scalar s) {
     value_ = static_cast<T>(std::lround(value_ / s));
     return *this;
   }
 
-private:
+ private:
   T value_;
 };
 
@@ -130,7 +133,8 @@ using Angle64 = Angle<int64_t>;
  * @param rhs An Angle object
  * @return Result of addition
  */
-template <typename T> Angle<T> operator+(Angle<T> lhs, Angle<T> rhs) {
+template <typename T>
+Angle<T> operator+(Angle<T> lhs, Angle<T> rhs) {
   lhs += rhs;
   return lhs;
 }
@@ -141,7 +145,8 @@ template <typename T> Angle<T> operator+(Angle<T> lhs, Angle<T> rhs) {
  * @param rhs An Angle object
  * @return Result of subtraction
  */
-template <typename T> Angle<T> operator-(Angle<T> lhs, Angle<T> rhs) {
+template <typename T>
+Angle<T> operator-(Angle<T> lhs, Angle<T> rhs) {
   lhs -= rhs;
   return lhs;
 }
@@ -188,7 +193,8 @@ Angle<T> operator/(Angle<T> lhs, Scalar rhs) {
  * @param rhs A scalar
  * @return Result of division
  */
-template <typename T> double operator/(Angle<T> lhs, Angle<T> rhs) {
+template <typename T>
+double operator/(Angle<T> lhs, Angle<T> rhs) {
   return static_cast<double>(lhs.raw()) / rhs.raw();
 }
 
@@ -198,7 +204,8 @@ template <typename T> double operator/(Angle<T> lhs, Angle<T> rhs) {
  * @param rhs An Angle object
  * @return lhs == rhs
  */
-template <typename T> bool operator==(Angle<T> lhs, Angle<T> rhs) {
+template <typename T>
+bool operator==(Angle<T> lhs, Angle<T> rhs) {
   return lhs.raw() == rhs.raw();
 }
 
@@ -208,7 +215,8 @@ template <typename T> bool operator==(Angle<T> lhs, Angle<T> rhs) {
  * @param rhs An Angle object
  * @return lhs != rhs
  */
-template <typename T> bool operator!=(Angle<T> lhs, Angle<T> rhs) {
+template <typename T>
+bool operator!=(Angle<T> lhs, Angle<T> rhs) {
   return !(lhs == rhs);
 }
 
@@ -221,5 +229,5 @@ float sin(Angle8 a);
 float cos(Angle8 a);
 float tan(Angle8 a);
 
-} // namespace math
-} // namespace common
+}  // namespace math
+}  // namespace common

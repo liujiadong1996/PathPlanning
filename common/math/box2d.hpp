@@ -23,7 +23,7 @@ namespace math {
  * called "length", and the size of the axis perpendicular to it "width".
  */
 class Box2d {
-public:
+ public:
   Box2d() = default;
   /**
    * @brief Constructor which takes the center, heading, length and width.
@@ -231,7 +231,7 @@ public:
   double max_y() const { return max_y_; }
   double min_y() const { return min_y_; }
 
-private:
+ private:
   Vec2d center_;
   double length_ = 0.0;
   double width_ = 0.0;
@@ -248,5 +248,5 @@ private:
   double max_y_ = std::numeric_limits<double>::lowest();
   double min_y_ = std::numeric_limits<double>::max();
 };
-} // namespace math
-} // namespace common
+}  // namespace math
+}  // namespace common
