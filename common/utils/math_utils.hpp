@@ -59,6 +59,9 @@ double RandomDouble(const double s, const double t, unsigned int rand_seed = 1);
  * @param value The target value to get its squared value
  * @return Squared value of the input value.
  */
-template <typename T> inline T Square(const T value) { return value * value; }
-} // namespace utils
-} // namespace common
+template <typename T>
+inline T Square(const T value) {
+  return value * value;
+}
+}  // namespace utils
+}  // namespace common

@@ -6,7 +6,6 @@
 #include <unordered_map>
 
 #include "boost/math/tools/minima.hpp"
-
 #include "common/frenet/cartesian_frenet_conversion.hpp"
 #include "common/math/angle.hpp"
 #include "common/math/line_segment2d.hpp"
@@ -14,6 +13,7 @@
 #include "common/math/vec2d.hpp"
 #include "common/utils/math_utils.hpp"
 #include "common/utils/util.hpp"
+
 
 namespace planning {
 namespace reference_line {

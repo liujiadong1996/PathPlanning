@@ -6,8 +6,9 @@
 namespace common {
 namespace utils {
 class PointFactory {
-public:
-  template <typename XY> static inline math::Vec2d ToVec2d(const XY &xy) {
+ public:
+  template <typename XY>
+  static inline math::Vec2d ToVec2d(const XY &xy) {
     return math::Vec2d(xy.x(), xy.y());
   }
 
@@ -45,11 +46,10 @@ public:
     return speed_point;
   }
 
-  static inline common::PathPoint
-  ToPathPoint(const double x, const double y, const double z = 0.0,
-              const double s = 0.0, const double theta = 0.0,
-              const double kappa = 0.0, const double dkappa = 0.0,
-              const double ddkappa = 0.0) {
+  static inline common::PathPoint ToPathPoint(
+      const double x, const double y, const double z = 0.0,
+      const double s = 0.0, const double theta = 0.0, const double kappa = 0.0,
+      const double dkappa = 0.0, const double ddkappa = 0.0) {
     common::PathPoint path_point;
     path_point.x = x;
     path_point.y = y;
@@ -62,5 +62,5 @@ public:
     return path_point;
   }
 };
-} // namespace utils
-} // namespace common
+}  // namespace utils
+}  // namespace common

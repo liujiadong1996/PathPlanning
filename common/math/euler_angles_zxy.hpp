@@ -2,9 +2,9 @@
 
 #include <cmath>
 
+#include "common/utils/math_utils.hpp"
 #include "eigen3/Eigen/Geometry"
 
-#include "common/utils/math_utils.hpp"
 
 namespace common {
 namespace math {

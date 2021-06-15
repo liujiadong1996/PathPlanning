@@ -4,6 +4,9 @@
 #include <iostream>
 #include "common/data_structure.hpp"
 
+#include "common/data_structure.hpp"
+
+
 namespace common {
 namespace math {
 
